@@ -1,0 +1,389 @@
+@page "/shopping/{_opencase:int?}"
+@page "/shopping"
+<!doctype html>
+<html lang="en">
+@inject IJSRuntime JSRuntime
+@inject NavigationManager MyNavigationManager
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="listStyle.css">
+</head>
+
+<body>
+  <div class="row">
+    @*~~~~~~~~~~~~~~~~~~~~~~~~~ This is for the logo(col-2) and search bar (col-10) ~~~~~~~~~~~~~~~~~~~~~~~~~`*@
+    <div class="col-2">
+      <a class="d-flex justify-content-center" style="height: 90%">
+        <img src="@imageSource" />
+        @code {
+          private string? imageSource = $"images/Ellipse.png";
+        }
+      </a>
+    </div>
+    <div class="col-10">
+      <Keyboard />
+    </div>
+
+
+    @*~~~~~~~~~~~~~~~~~~~~~~~~~ This is for the filter (col-2) and accordian list (col-10) ~~~~~~~~~~~~~~~~~~~~~~~*@
+    <div class="col-2">
+      <h1 style="text-align:center;">Filter</h1>
+
+      <h5 class="mt-2" style="text-align:left;"><b>Type</b></h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="chain">
+        <label class="form-check-label" for="chain">
+          Chain Store
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="loca">
+        <label class="form-check-label" for="loca">
+          Local
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="mal">
+        <label class="form-check-label" for="mal">
+          Mall
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="outl">
+        <label class="form-check-label" for="outl">
+          Outlet
+        </label>
+      </div>
+
+      <h5 class="mt-4" style="text-align:left;"><b>Rating</b></h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="1s">
+        <label class="form-check-label" for="1s" style="color: gold">
+          ★☆☆☆☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="2s">
+        <label class="form-check-label" for="2s" style="color: gold">
+          ★★☆☆☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="3s">
+        <label class="form-check-label" for="3s" style="color: gold">
+          ★★★☆☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="4s">
+        <label class="form-check-label" for="4s" style="color: gold">
+          ★★★★☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="5s">
+        <label class="form-check-label" for="5s" style="color: gold">
+          ★★★★★
+        </label>
+      </div>
+
+
+      <div class="dropdown d-flex justify-content-center" style="padding-top: 180px">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+          data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #C8102F; color: black;">
+          Language
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #FFC6C6;">
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Vietnamese</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>English</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Chinese</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Filipino</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>French</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseOne">
+              <div class="col-3">
+                <img src="/textures/winner.jpg" alt="Winners" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">Winners</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$ Department Store</p>
+                  </div>
+                  <div class="col">
+                    <p>9:30 am – 8:00 pm<br>128 8 Ave SW</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/Winners-racks.jpg" alt="winner racks" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Price Range<br>$10-50<br></strong>
+                  <br><strong>Products</strong><br>Clothes<br>Beauty products<br>
+                  <br><strong>Description</strong><br>At WINNERS, we deliver great value on ever-changing selections of
+                  brand name, designer and other high-quality fashions at prices generally 20%-60% below full-price
+                  retailers’ (including department, specialty, and major online retailers) regular prices on comparable
+                  merchandise, every day<br>
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doShopping();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseTwo">
+              <div class="col-3">
+                <img src="/Img/cim.jpg" alt="crossiron mills" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">CrossIron Mills</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$Shopping Mall</p>
+                  </div>
+                  <div class="col">
+                    <p>10:00 am - 9:00 pm<br>261055 Crossiron Blvd</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/cim1.jpg" alt="crossiron mill 1" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Malls<br><br>
+                  <strong>Price Range<br>$30-$60<br></strong><br>
+                  <strong>Description</strong><br>Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua<br>
+                </div>
+                <div class="col">
+                  <a href="/map"><img id=minimap1 src="/Img/minimap.JPG" alt="minimap"
+                      style="width:225px;height:300px;"></a>
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree">
+              <div class="col-3">
+                <img src="/Img/skec.jpg" alt="SKECHERS" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">SKECHERS</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$$ Footwear Store</p>
+                  </div>
+                  <div class="col">
+                    <p>5 am - 10 pm<br>6455 Macleod Trail SW</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingThree">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/fill1.JPG" alt="McD" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Malls<br><br>
+                  <strong>Price Range<br>$30-$60<br></strong><br>
+                  <strong>Description</strong><br>Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua<br>
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseFour">
+              <div class="col-3">
+                <img src="/Img/ld.jpg" alt="london drugs" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">London Drugs</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$ Pharmacy</p>
+                  </div>
+                  <div class="col">
+                    <p>5 am - 10 pm<br>3545 32 Ave NE</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingFour">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/fill1.JPG" alt="McD" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Malls<br><br>
+                  <strong>Price Range<br>$30-$60<br></strong><br>
+                  <strong>Description</strong><br>Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua<br>
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseFive">
+              <div class="col-3">
+                <img src="/Img/gs.jpg" alt="game stop" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">GameStop</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$ Game Store</p>
+                  </div>
+                  <div class="col">
+                    <p>5 am - 10 pm<br>100 Anderson Rd SE</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingFive">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/fill1.jpg" alt="McD" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Malls<br><br>
+                  <strong>Price Range<br>$30-$60<br></strong><br>
+                  <strong>Description</strong><br>Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua<br>
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+@code {
+  [Parameter]
+  public int? _opencase { get; set; }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    _opencase = _opencase ?? 0;
+    if (_opencase == 1)
+    {
+      await JSRuntime.InvokeAsync<string>("openFirstHeader");
+    }
+  }
+}

@@ -1,0 +1,78 @@
+@page "/emergency"
+@layout EmergencyLayout
+
+<PageTitle>Emergency</PageTitle>
+
+<div>
+    <h1>
+        <left>
+            <form>
+                <input type="button" class="GoBack" value="  X  " onclick="history.go(-1)">
+            </form>
+        </left>
+    </h1>
+</div>
+
+<div>
+    <h2>
+        <div class="text">
+            <center>
+                Emergency Alert!
+            </center>
+        </div> 
+        <center>
+            <div class="Circle">
+                <div class="container">
+                    <div class="row">
+                        <div class="column" style=></div>
+                        <div class="column" style="color: black;">Help is on the way!</div>
+                        <div class="column"></div>
+                    </div>
+                        <div class="row">
+                            <div class="column"></div>
+                            <div class="column" style="color: black;">Stay near if safe!</div>
+                            <div class="column"></div>
+                        </div>
+                    </div>
+            </div>
+        </center>
+    </h2>
+</div>
+
+<style>
+    .GoBack {
+        background-color: white;
+        border: 3px solid black;
+        text-align: center;
+        margin-bottom: 4.5em;
+        font-size: 40px;
+        border-radius: 100%;
+    }
+
+    .Circle {
+        height: 250px;
+        width: 250px;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 50%;
+        background: white;
+        background-color: white;
+        border: 3px solid black;
+        border-radius: 50%;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1.5em;
+        padding-bottom: 0.5em;
+
+    }
+    
+    .text {
+        margin-bottom: 1em;
+    }
+
+    body {
+        background-color: #C8102e;
+        color: #FFE710;
+    }
+</style>

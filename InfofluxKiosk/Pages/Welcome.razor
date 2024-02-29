@@ -1,0 +1,52 @@
+@page "/welcome"
+@using Microsoft.Extensions.Logging
+@implements IDisposable
+@inject ILogger<Welcome> Logger
+@inject NavigationManager NavigationManager
+@layout WelcomeLayout
+
+<PageTitle>Welcome</PageTitle>
+
+<div>
+    <center>
+        <button class="ClickAnywhere1" @onclick="NavigateToMap">
+        </button>
+    </center>
+</div>
+
+<style>
+    .ClickAnywhere1
+    {
+        display: inline-block;
+        border: none;
+        width: 1864px;
+        height: 825px;
+        background-image: url('/Images/Capture.PNG');
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-position: center;
+    }    
+</style>
+
+
+@code {
+    private void NavigateToMap()
+    {
+        NavigationManager.NavigateTo("map");
+    }
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        Logger.LogInformation("URL of new location: {Location}", e.Location);
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= HandleLocationChanged;
+    }
+}

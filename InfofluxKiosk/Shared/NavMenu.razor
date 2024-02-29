@@ -1,0 +1,73 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Modify the background color */
+
+        .navbar-custom {
+            background-color: #FECBD4;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            color: black;
+            background-color: #C8102E;
+        }
+
+        /* Modify brand and text color */
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-text {
+            color: black;
+        }
+
+        @*.mynav{position:fixed;top:0;width:100%;}*@
+    </style>
+</head>
+
+<body>
+    <div class="mynav">
+        <div class="row" style="background-color: #E5E5E5;">
+            <div class="col mt-2" style="text-align: center;">
+                <h1>3:28pm MST</h1>
+                <h3>Thursday, March 24, 2022</h3>
+            </div>
+            <div class="col">
+                <a class="weatherwidget-io" href="https://forecast7.com/en/51d05n114d07/calgary/" data-label_1="CALGARY"
+                    data-label_2="WEATHER" data-theme="original">CALGARY WEATHER</a>
+                <script suppress-error="BL9992">
+                    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+                </script>
+            </div>
+        </div>
+        <div @onclick="ToggleNavMenu">
+            <nav class="nav nav-pills nav-justified navbar-custom">
+                <NavLink class="nav-link py-3" href="map" Match="NavLinkMatch.All">
+                    <h4><span class="fa fa-map-marker" aria-hidden="true"></span> Map</h4>
+                </NavLink>
+                <NavLink class="nav-link py-3" href="food" Match="NavLinkMatch.All">
+                    <h4><span class="fa fa-cutlery" aria-hidden="true"></span> Food</h4>
+                </NavLink>
+                <NavLink class="nav-link py-3" href="shopping" Match="NavLinkMatch.All">
+                    <h4><span class="fa fa-shopping-bag" aria-hidden="true"></span> Shopping</h4>
+                </NavLink>
+                <NavLink class="nav-link py-3" href="activities" Match="NavLinkMatch.All">
+                    <h4><span class="fa fa-calendar" aria-hidden="true"></span> Activities</h4>
+                </NavLink>
+                <NavLink class="nav-link py-3" href="lodging" Match="NavLinkMatch.All">
+                    <h4><span class="fa fa-bed" aria-hidden="true"></span> Lodging</h4>
+                </NavLink>
+            </nav>
+        </div>
+    </div>
+</body>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

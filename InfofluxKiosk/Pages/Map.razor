@@ -1,0 +1,163 @@
+@page "/map/{_lat_loaded:float?}/{_long_loaded:float?}/{_zoom_loaded:float?}"
+@page "/map/{_lat_loaded:float?}/{_long_loaded:float?}"
+@page "/map"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager MyNavigationManager
+
+<body>
+    <div class="row">
+        @*~~~~~~~~~~~~~~~~~~~~~~~~~ This is for the logo(col-2) and search bar (col-10) ~~~~~~~~~~~~~~~~~~~~~~~~~`*@
+        <div class="col-2">
+            <a class="d-flex justify-content-center" style="height: 90%">
+                <img src="@imageSource" />
+                @code {
+                    private string? imageSource = $"images/Ellipse.png";
+                }
+            </a>
+        </div>
+        <div class="col-10">
+            <Keyboard />
+        </div>
+
+        @*~~~~~~~~~~~~~~~~~~~~~~~~~ This is for the filter (col-2) and accordian list (col-10) ~~~~~~~~~~~~~~~~~~~~~~*@
+        <div class="col-2">
+            <h1 style="text-align:center;">Filter</h1>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="res"
+                    @onchange="eventArgs => { CheckboxClickedFood(eventArgs.Value); }">
+                <label class="form-check-label" for="res">
+                    Restaurants
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="sto"
+                    @onchange="eventArgs => { CheckboxClickedShopping(eventArgs.Value); }">
+                <label class="form-check-label" for="sto">
+                    Stores
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="ho"
+                    @onchange="eventArgs => { CheckboxClickedLodging(eventArgs.Value); }">
+                <label class="form-check-label" for="ho">
+                    Hotels
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="mu">
+                <label class="form-check-label" for="mu">
+                    Museum
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="rf">
+                <label class="form-check-label" for="rf">
+                    Recreational facilities
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="sh">
+                <label class="form-check-label" for="sh">
+                    Schools
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="pa">
+                <label class="form-check-label" for="pa">
+                    Parks
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="hos">
+                <label class="form-check-label" for="hos">
+                    Hospitals
+                </label>
+            </div>
+
+            <div class="dropdown d-flex justify-content-center" style="padding-top: 300px">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #C8102F; color: black;">
+                    Language
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #FFC6C6;">
+                    <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Vietnamese</a></li>
+                    <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>English</a></li>
+                    <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Chinese</a></li>
+                    <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Filipino</a></li>
+                    <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>French</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-10">
+            <div id="map" style="height:600px;width:100%;"> </div>
+        </div>
+    </div>
+</body>
+
+
+@code {
+    [Parameter]
+    public float? _lat_loaded { get; set; }
+    [Parameter]
+    public float? _long_loaded { get; set; }
+    [Parameter]
+    public float? _zoom_loaded { get; set; }
+
+    public List<string> clicked { get; set; } = new List<string>();
+
+    public class MapInit
+    {
+        public float _lat { get; set; }
+        public float _long { get; set; }
+        public float _zoom { get; set; }
+        public List<string> clicked { get; set; }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        _lat_loaded = _lat_loaded ?? 51.0452f;
+        _long_loaded = _long_loaded ?? -114.0631f;
+        _zoom_loaded = _zoom_loaded ?? 17.0f;
+
+        if (true)
+        {
+            MapInit init = new MapInit();
+            init._lat = _lat_loaded.Value;
+            init._long = _long_loaded.Value;
+            init._zoom = _zoom_loaded.Value;
+            init.clicked = clicked;
+            await JSRuntime.InvokeAsync<string>("loadBingMap", init);
+        }
+    }
+
+    void CheckboxClickedFood(object checkedValue)
+    {
+        CheckboxClicked("food", checkedValue);
+    }
+
+    void CheckboxClickedShopping(object checkedValue)
+    {
+        CheckboxClicked("shopping", checkedValue);
+    }
+
+    void CheckboxClickedLodging(object checkedValue)
+    {
+        CheckboxClicked("lodging", checkedValue);
+    }
+
+    void CheckboxClicked(string type, object checkedValue)
+    {
+        if ((bool)checkedValue)
+        {
+            clicked.Add(type);
+        }
+        else
+        {
+            clicked.Remove(type);
+        }
+        clicked = clicked.Distinct().ToList();
+        StateHasChanged();
+    }
+}

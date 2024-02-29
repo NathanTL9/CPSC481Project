@@ -1,0 +1,434 @@
+@page "/food/{_opencase:int?}"
+@page "/food"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager MyNavigationManager
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="listStyle.css">
+</head>
+
+<body>
+  <div class="row">
+    @*~~~~~~~~~~~~~~~~~~~~~~~~~ This is for the logo(col-2) and search bar (col-10) ~~~~~~~~~~~~~~~~~~~~~~~~~`*@
+    <div class="col-2">
+      <a class="d-flex justify-content-center" style="height: 90%">
+        <img src="@imageSource" />
+        @code {
+          private string? imageSource = $"images/Ellipse.png";
+        }
+      </a>
+    </div>
+    <div class="col-10">
+      <Keyboard />
+    </div>
+
+
+    @*~~~~~~~~~~~~~~~~~~~~~~~~~ This is for the filter (col-2) and accordian list (col-10) ~~~~~~~~~~~~~~~~~~~~~~~*@
+    <div class="col-2" style="overflow-y: auto">
+      <h1 style="text-align:center;">Filter</h1>
+
+      <h5 class="mt-2" style="text-align:left;"><b>Price</b></h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="1s">
+        <label class="form-check-label" for="1s" style="color: green">
+          $
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="2s">
+        <label class="form-check-label" for="2s" style="color: green">
+          $$
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="3s">
+        <label class="form-check-label" for="3s" style="color: green">
+          $$$
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="4s">
+        <label class="form-check-label" for="4s" style="color: green">
+          $$$$
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="5s">
+        <label class="form-check-label" for="5s" style="color: green">
+          $$$$$
+        </label>
+      </div>
+
+      <h5 class="mt-4" style="text-align:left;"><b>Type</b></h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="chain">
+        <label class="form-check-label" for="chain">
+          Bistro
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="loca">
+        <label class="form-check-label" for="loca">
+          Cafe
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="mal">
+        <label class="form-check-label" for="mal">
+          Fast Food
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="outl">
+        <label class="form-check-label" for="outl">
+          Dining
+        </label>
+      </div>
+
+      <h5 class="mt-4" style="text-align:left;"><b>Rating</b></h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="1s">
+        <label class="form-check-label" for="1s" style="color: gold">
+          ★☆☆☆☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="2s">
+        <label class="form-check-label" for="2s" style="color: gold">
+          ★★☆☆☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="3s">
+        <label class="form-check-label" for="3s" style="color: gold">
+          ★★★☆☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="4s">
+        <label class="form-check-label" for="4s" style="color: gold">
+          ★★★★☆
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="5s">
+        <label class="form-check-label" for="5s" style="color: gold">
+          ★★★★★
+        </label>
+      </div>
+
+      <h5 class="mt-4" style="text-align:left;"><b>Restriction</b></h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="chain">
+        <label class="form-check-label" for="chain">
+          Allergies
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="loca">
+        <label class="form-check-label" for="loca">
+          Gluten-Free
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="mal">
+        <label class="form-check-label" for="mal">
+          Vegetarian
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="outl">
+        <label class="form-check-label" for="outl">
+          Vegan
+        </label>
+      </div>
+
+      <div class="dropdown d-flex justify-content-center">
+        <a class=" btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+          data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #C8102F; color: black;">
+          Language
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #FFC6C6;">
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Vietnamese</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>English</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Chinese</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>Filipino</a></li>
+          <li><a class="dropdown-item" href=@(MyNavigationManager.Uri)>French</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne">
+              <div class="col-3">
+                <img src="/textures/charcut-roast-house.JPG" alt="charcut" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%; ">CHARCUT Roast House</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$$$ Steak House</p>
+                  </div>
+                  <div class="col">
+                    <p>11:00 am - 10:00 pm<br>899 Centre St S</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/steak.JPG" alt="CHARCUT" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Resturaunts<br>
+                  <br><strong>Price Range<br>$30-$60<br></strong>
+                  <br><strong>Diet</strong><br>Vegetarian Option<br>Gluten Free Options
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo">
+              <div class="col-3">
+                <img src="/Img/McD.png" alt="Blue Star Diner" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">Mcdonalds</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$ Fast Food</p>
+                  </div>
+                  <div class="col">
+                    <p>5 am - 10 pm <br>2740 32 Ave NE</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/burger.JPG" alt="McD" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Fast Food<br><br>
+                  <strong>Price Range<br>$1-$15<br></strong><br>
+                  <strong>Diet</strong><br>Vegetarian Option<br>Gluten Free Options
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree">
+              <div class="col-3">
+                <img src="/Img/SCB.jpg" alt="SCB" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">Sidewalk Citizen Bakery</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$$ Cafe Bakery</p>
+                  </div>
+                  <div class="col">
+                    <p> 9 am - 7 pm <br>338 10 St NW</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingThree">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/SCB1.JPG" alt="SCB Inside" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Bakery<br><br>
+                  <strong>Price Range<br>$3-$15<br></strong><br>
+                  <strong>Diet</strong><br>Vegetarian Option<br>Gluten Free Options
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br>
+                  <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseFour">
+              <div class="col-3">
+                <img src="/Img/bsd.jpg" alt="Blue Star Diner" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">Blue Star Diner</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$$ Diner</p>
+                  </div>
+                  <div class="col">
+                    <p> 8 am - 9 pm <br>809 1 Ave NE</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingFour">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/bsd1.JPG" alt="Blue Star Diner Food" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Diner<br><br>
+                  <strong>Price Range<br>$10-$25<br></strong><br>
+                  <strong>Diet</strong><br>Vegetarian Option<br>Gluten Free Options
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <div class="row">
+                    <input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                      style="width:225px; background-color:red" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseFive">
+              <div class="col-3">
+                <img src="/Img/wendys.png" alt="Wendy's" style="width:150px;height:100px;">
+              </div>
+              <!-- accordion-header text content -->
+              <div class="col-6">
+                <h1 style="font-size:150%;">Wendy's</h1>
+                <div class="row">
+                  <div class="col-4">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p>$ Fast Food.</p>
+                  </div>
+                  <div class="col">
+                    <p> 11 am - 12 am <br>808 1 St SE</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingFive">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col">
+                  <img src="/Img/wendys1.JPG" alt="wendy food" style="width:225px;height:150px;">
+                </div>
+                <div class="col">
+                  <strong>Ranking</strong><br>123 of Calgary Fast Food<br><br>
+                  <strong>Price Range<br>$1-$15<br></strong><br>
+                  <strong>Diet</strong><br>Vegetarian Option<br>Gluten Free Options
+                </div>
+                <div class="col">
+                  <img src="/Img/minimap.JPG" alt="minimap" style="width:225px;height:300px;">
+                  <br><input id="clickMe" type="button" value="See on Map" onclick="doFunction();"
+                    style="width:225px; background-color:red" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+@code {
+  [Parameter]
+  public int? _opencase { get; set; }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    _opencase = _opencase ?? 0;
+    if (_opencase == 1)
+    {
+      await JSRuntime.InvokeAsync<string>("openFirstHeader");
+    }
+  }
+}

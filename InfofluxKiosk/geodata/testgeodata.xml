@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone="yes"?>  
+<FourthCoffeeSample>  
+  <xs:schema id="FourthCoffeeSample" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">  
+    <xs:element name="FourthCoffeeSample" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">  
+      <xs:complexType>  
+        <xs:choice minOccurs="0" maxOccurs="unbounded">  
+          <xs:element name="FourthCoffeeShops">  
+            <xs:complexType>  
+              <xs:sequence>  
+                <xs:element name="AddressLine" type="xs:string" minOccurs="0" />  
+                <xs:element name="Locality" type="xs:string" minOccurs="0" />  
+                <xs:element name="AdminDistrict" type="xs:string" minOccurs="0" />  
+                <xs:element name="PostalCode" type="xs:string" minOccurs="0" />  
+                <xs:element name="CountryRegion" type="xs:string" minOccurs="0" />  
+                <xs:element name="Phone" type="xs:string" minOccurs="0" />  
+                <xs:element name="Manager" type="xs:string" minOccurs="0" />  
+                <xs:element name="EntityID" type="xs:string" />  
+                <xs:element name="Longitude" type="xs:double" minOccurs="0" />  
+                <xs:element name="Latitude" type="xs:double" minOccurs="0" />  
+              </xs:sequence>  
+            </xs:complexType>  
+          </xs:element>  
+        </xs:choice>  
+      </xs:complexType>  
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">  
+        <xs:selector xpath=".//FourthCoffeeShops" />  
+        <xs:field xpath="EntityID" />  
+      </xs:unique>  
+    </xs:element>  
+  </xs:schema>  
+  <FourthCoffeeShops>  
+    <EntityID>1001</EntityID>  
+    <Latitude>47.64054</Latitude>  
+    <Longitude>-122.12934</Longitude>  
+    <Phone>425-555-0111</Phone>  
+    <Manager>Phil Spencer</Manager>  
+  </FourthCoffeeShops>  
+</FourthCoffeeSample>  

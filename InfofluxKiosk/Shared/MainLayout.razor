@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>InfoFlux Calgary Kiosk</PageTitle>
+
+<div class="page">
+    <nav style="position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;">
+        <NavMenu />
+    </nav>
+
+    <main style="padding-top: 190px; ">
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

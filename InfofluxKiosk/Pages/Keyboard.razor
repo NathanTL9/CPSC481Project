@@ -1,0 +1,122 @@
+<div class="col-12">
+  <div class="input-group mt-5">
+    <input type="text" class="form-control" placeholder="Search">
+    <div class="input-group-append">
+      <button class="btn btn-danger" type="button" style="background-color: #C8102e;">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+    <div class="hiddendiv"> 
+      <div id="keyboard-container" style="background-color: #E5E5E5;">
+        <div class="keyboard-row">
+          <button data-key="q">1</button>
+          <button data-key="w">2</button>
+          <button data-key="e">3</button>
+          <button data-key="r">4</button>
+          <button data-key="t">5</button>
+          <button data-key="y">6</button>
+          <button data-key="u">7</button>
+          <button data-key="i">8</button>
+          <button data-key="o">9</button>
+        </div>
+        <div class="keyboard-row">
+          <button data-key="q">q</button>
+          <button data-key="w">w</button>
+          <button data-key="e">e</button>
+          <button data-key="r">r</button>
+          <button data-key="t">t</button>
+          <button data-key="y">y</button>
+          <button data-key="u">u</button>
+          <button data-key="i">i</button>
+          <button data-key="o">o</button>
+          <button data-key="p">p</button>
+        </div>
+        <div class="keyboard-row">
+          <div class="spacer-half"></div>
+          <button data-key="a">a</button>
+          <button data-key="s">s</button>
+          <button data-key="d">d</button>
+          <button data-key="f">f</button>
+          <button data-key="g">g</button>
+          <button data-key="h">h</button>
+          <button data-key="j">j</button>
+          <button data-key="k">k</button>
+          <button data-key="l">l</button>
+          <div class="spacer-half"></div>
+        </div>
+        <div class="keyboard-row">
+          <button data-key="enter" class="wide-button">Enter</button>
+          <button data-key="z">z</button>
+          <button data-key="x">x</button>
+          <button data-key="c">c</button>
+          <button data-key="v">v</button>
+          <button data-key="b">b</button>
+          <button data-key="n">n</button>
+          <button data-key="m">m</button>
+          <button data-key="del" class="wide-button">Delete</button>
+        </div>
+        <div class="keyboard-row">
+          <button data-key="a">Shift</button>
+          <button data-key="del" class="wide-button">Space</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #keyboard-container {
+    height: 340px;
+    width: 1000px;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 10px;
+    position: absolute;
+    z-index: 10;
+  }
+
+  .keyboard-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
+  }
+
+  .keyboard-row button {
+    font-family: inherit;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    margin: 0 6px 0 0;
+    height: 58px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #C8102e;
+    color: #ffffff;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .keyboard-row button.wide-button {
+    flex: 1.5;
+  }
+
+  .hiddendiv {
+    margin-right: 1500px;
+    margin-top: 42px;
+    display: none;
+  }
+
+  input[type=text]:focus+.input-group-append+.hiddendiv {
+    display: block;
+    position: absolute;
+  }
+</style>

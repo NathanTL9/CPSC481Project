@@ -1,6 +1,4 @@
-# CPSC481Project
-
-CPSC 481 
+# CPSC 481 Project
 
 By: Group 3
 - Brendan Lam 
